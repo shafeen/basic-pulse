@@ -42,16 +42,17 @@ block content
             span.font-italic (#{val.description})&nbsp;
         .row
           .col-md.text-muted
-            if val.lastUpdate && !val.lastUpdate.requestFailure
+            if val.lastUpdate
               span
                 i.fas.fa-clock &nbsp;
                 | updated: #{val.lastUpdate.timestamp.toLocaleString().split(' ')[1]}
               span &nbsp;&nbsp;
-              span
-                i.fas.fa-stopwatch &nbsp;
-                | #{val.lastUpdate.latencyInMs}ms&nbsp;
-              span &nbsp;&nbsp;
-              span
-                i.fas.fa-weight-hanging &nbsp;
-                | #{val.lastUpdate.size}&nbsp;
+              if !val.lastUpdate.requestFailure
+                span
+                  i.fas.fa-stopwatch &nbsp;
+                  | #{val.lastUpdate.latencyInMs}ms&nbsp;
+                span &nbsp;&nbsp;
+                span
+                  i.fas.fa-weight-hanging &nbsp;
+                  | #{val.lastUpdate.size}&nbsp;
     .row &nbsp;
