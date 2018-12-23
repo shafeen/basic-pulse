@@ -2,7 +2,7 @@ class RecurringCallbackRegister {
 
     /**
      * @param {Object} [config]
-     * @param {Function} config.onRecurringCallback
+     * @param {Function} config.onRecurringCallback - has 2 params (result, recurringCallback)
      */
     constructor(config) {
         this.callbackToSetIntervalId = new Map();

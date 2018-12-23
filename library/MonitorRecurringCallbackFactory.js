@@ -34,7 +34,8 @@ class MonitorRecurringCallbackFactory {
                 responseObj === null,
                 responseObj? responseObj.statusCode : undefined,
                 responseObj? parseInt(responseObj.timings.end) : undefined,
-                responseObj? responseObj.body.length : undefined
+                responseObj? responseObj.body.length : undefined,
+                new Date(Date.now())
             );
         };
         return new MonitorRecurringCallback(

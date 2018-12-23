@@ -4,12 +4,14 @@ class MonitorCallbackResult {
      * @param {int} statusCode
      * @param {number} latencyInMs
      * @param {number} size
+     * @param {Date} timestamp
      */
-    constructor(requestFailure, statusCode, latencyInMs, size) {
+    constructor(requestFailure, statusCode, latencyInMs, size, timestamp) {
         this.requestFailure = requestFailure;
         this.statusCode = statusCode;
         this.latencyInMs = latencyInMs;
         this.size = size;
+        this.timestamp = timestamp;
     }
 
     toString() {

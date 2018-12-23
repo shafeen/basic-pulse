@@ -1,5 +1,37 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  style.
+    .status-good {
+      font-weight: bold;
+      color: green;
+    }
+    .status-bad {
+      font-weight: bold;
+      color: indianred;
+    }
+    .status-error {
+      font-weight: bold;
+      color: red;
+    }
+
+  h1 #{title}
+
+  ul
+    for val in callbackStatusList
+      li
+        span #{val.name}&nbsp;(#{val.description})&nbsp; - &nbsp;
+        if val.lastUpdate
+          if val.lastUpdate.statusCode===200
+            span.status-good status: GOOD&nbsp;
+          else if val.lastUpdate.requestFailure
+            span.status-error status: FAILED&nbsp;
+          else
+            span.status-bad status: BAD&nbsp;
+          if !val.lastUpdate.requestFailure
+            span -&nbsp;
+            span latency: #{val.lastUpdate.latencyInMs}ms&nbsp;
+            span -&nbsp;
+            span size: #{val.lastUpdate.size}&nbsp;
+            span -&nbsp;
+            span last checked: #{val.lastUpdate.timestamp.toLocaleString().split(' ')[1]}
