@@ -17,21 +17,38 @@ block content
 
   h1 #{title}
 
-  ul
-    for val in callbackStatusList
-      li
-        span #{val.name}&nbsp;(#{val.description})&nbsp; - &nbsp;
+  .container
+  for val in callbackStatusList
+    .row
+      .col-md-1.text-right.my-auto
         if val.lastUpdate
           if val.lastUpdate.statusCode===200
-            span.status-good status: GOOD&nbsp;
+            span
+              i.fas.fa-3x.fa-check-circle.status-good
           else if val.lastUpdate.requestFailure
-            span.status-error status: FAILED&nbsp;
+            span
+              i.fas.fa-3x.fa-skull.status-error
           else
-            span.status-bad status: BAD&nbsp;
-          if !val.lastUpdate.requestFailure
-            span -&nbsp;
-            span latency: #{val.lastUpdate.latencyInMs}ms&nbsp;
-            span -&nbsp;
-            span size: #{val.lastUpdate.size}&nbsp;
-            span -&nbsp;
-            span last checked: #{val.lastUpdate.timestamp.toLocaleString().split(' ')[1]}
+            span
+              i.fas.fa-3x.fa-times-circle.status-bad
+          span &nbsp;
+      .col
+        .row
+          .col
+            span.font-weight-bold #{val.name}&nbsp;
+            span.font-italic (#{val.description})&nbsp;
+        .row
+          .col-md.text-muted
+            if val.lastUpdate && !val.lastUpdate.requestFailure
+              span
+                i.fas.fa-clock &nbsp;
+                | updated: #{val.lastUpdate.timestamp.toLocaleString().split(' ')[1]}
+              span &nbsp;&nbsp;
+              span
+                i.fas.fa-stopwatch &nbsp;
+                | #{val.lastUpdate.latencyInMs}ms&nbsp;
+              span &nbsp;&nbsp;
+              span
+                i.fas.fa-weight-hanging &nbsp;
+                | #{val.lastUpdate.size}&nbsp;
+    .row &nbsp;
